@@ -1,0 +1,5 @@
+bin/
+*.zip
+release/
+tmp/
+zeal.ini
