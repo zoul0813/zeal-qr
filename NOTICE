@@ -12,3 +12,4 @@ Modified files from Dan Jackson's qrtiny library:
 - src/qrtiny.h: removed stdlib.h
 - src/qrtiny.h: removed pragma warn
 - src/qrtiny.h: inlined abs() from stdlib.h
+- src/qrtiny.c: optimized QrTinyCalculateMask() for Z80/SDCC

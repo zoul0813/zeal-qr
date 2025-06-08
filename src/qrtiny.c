@@ -207,17 +207,16 @@ static int QrTinyIdentifyModule(int x, int y, uint16_t formatInfo)
 
 static bool QrTinyCalculateMask(uint16_t formatInfo, int j, int i)
 {
-    switch (QRTINY_FORMATINFO_TO_MASKPATTERN(formatInfo)) {
-        case 0: return ((i + j) & 1) == 0;
-        case 1: return (i & 1) == 0;
-        case 2: return j % 3 == 0;
-        case 3: return (i + j) % 3 == 0;
-        case 4: return (((i >> 1) + (j / 3)) & 1) == 0;
-        case 5: return ((i * j) & 1) + ((i * j) % 3) == 0;
-        case 6: return ((((i * j) & 1) + ((i * j) % 3)) & 1) == 0;
-        case 7: return ((((i * j) % 3) + ((i + j) & 1)) & 1) == 0;
-    }
-    return false;
+    uint8_t m = QRTINY_FORMATINFO_TO_MASKPATTERN(formatInfo);
+    uint16_t ij = i * j;
+    if (m == 0) return ((i + j) & 1) == 0;
+    else if (m == 1) return (i & 1) == 0;
+    else if (m == 2) return j % 3 == 0;
+    else if (m == 3) return (i + j) % 3 == 0;
+    else if (m == 4) return (((i >> 1) + (j / 3)) & 1) == 0;
+    else if (m == 5) return ((ij & 1) + (ij % 3)) == 0;
+    else if (m == 6) return (((ij & 1) + (ij % 3)) & 1) == 0;
+    else /* m == 7 */ return (((ij % 3) + ((i + j) & 1)) & 1) == 0;
 }
 
 // --- Reed-Solomon Error-Correction Code ---
