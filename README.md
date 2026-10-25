@@ -21,5 +21,7 @@ Then open a terminal, go to the source directory and type the following commands
 
 ```shell
     $ cd {project}
-    $ zde make
+    $ zde cmake
 ```
+
+The generated program is `bin/qr.bin`; intermediate files are kept in `build/`.
